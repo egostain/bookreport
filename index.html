@@ -5,21 +5,21 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>독후감 노트</title>
 <link rel="manifest" href="manifest.webmanifest">
-<meta name="theme-color" content="#3d6fe0">
+<meta name="theme-color" content="#4c6290">
 <link rel="icon" href="icon-192.png">
 <link rel="apple-touch-icon" href="icon-192.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="독후감노트">
 <style>
-:root{--blue:#3d6fe0;--blue2:#2a55bd;--bl:#e8effd;--bm:#cfdcf9;--bg:#eef1f6;--card:#fff;--ink:#27303f;--sub:#6b778a;--line:#dde3ec;--gray:#aab4c4;--warn:#d6455d;--safe-b:env(safe-area-inset-bottom,0px)}
+:root{--blue:#4c6290;--blue2:#3a4d77;--bl:#e3e9f4;--bm:#d0daec;--bg:#e8ecf2;--card:#fff;--ink:#263042;--sub:#6b778a;--line:#d9e0ea;--gray:#aab4c4;--warn:#d6455d;--safe-b:env(safe-area-inset-bottom,0px)}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;font-size:16px;line-height:1.5}
 body{min-height:100vh}
 button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;padding:0}
 input,textarea,select{font:inherit;color:inherit}
 #app{max-width:560px;margin:0 auto;min-height:100vh;padding-bottom:calc(96px + var(--safe-b))}
-.top{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:10px;padding:calc(10px + env(safe-area-inset-top,0px)) 14px 10px;background:linear-gradient(180deg,var(--blue),var(--blue2));color:#fff;box-shadow:0 2px 10px rgba(42,85,189,.25)}
+.top{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:10px;padding:calc(10px + env(safe-area-inset-top,0px)) 14px 10px;background:linear-gradient(180deg,var(--blue),var(--blue2));color:#fff;box-shadow:0 2px 10px rgba(58,77,119,.25)}
 .top h1{font-size:18px;margin:0;font-weight:800;letter-spacing:-.3px}
 .top small{display:block;opacity:.8;font-size:12px;margin-top:-2px}
 .top .grow{flex:1;min-width:0}
@@ -55,7 +55,7 @@ input,textarea,select{font:inherit;color:inherit}
 .sn{margin:0;color:#556176;font-size:13.5px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .empty{text-align:center;padding:36px 10px;color:var(--sub)}
 .empty .mon{margin:0 auto 8px}
-.fab{position:fixed;right:max(16px,calc(50% - 264px));bottom:calc(18px + var(--safe-b));z-index:6;background:var(--blue);color:#fff;border-radius:999px;height:54px;padding:0 22px;font-weight:700;box-shadow:0 6px 16px rgba(42,85,189,.4);display:flex;align-items:center;gap:6px;font-size:16px}
+.fab{position:fixed;right:max(16px,calc(50% - 264px));bottom:calc(18px + var(--safe-b));z-index:6;background:var(--blue);color:#fff;border-radius:999px;height:54px;padding:0 22px;font-weight:700;box-shadow:0 6px 16px rgba(58,77,119,.4);display:flex;align-items:center;gap:6px;font-size:16px}
 .fab:active{background:var(--blue2)}
 .draft{display:flex;align-items:center;gap:8px;background:#fff8e3;border:1.5px solid #f2dc95;border-radius:14px;padding:9px 12px;margin-bottom:10px;font-size:14px}
 .draft .t{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -118,6 +118,34 @@ textarea.in{min-height:46vh;line-height:1.7;resize:none;overflow:hidden}
 .pad4 button.k{font-size:20px;background:transparent;box-shadow:none}
 #lock .fg{margin-top:18px;color:var(--blue2);font-size:13.5px;text-decoration:underline}
 @media (max-height:640px){.pad4 button{height:52px}.pad4{gap:8px}}
+
+/* --- v2 디자인 다듬기 --- */
+.top{background:linear-gradient(180deg,#52689a,#43587f);box-shadow:0 2px 12px rgba(58,77,119,.22)}
+.top h1{font-weight:700;font-size:17px;letter-spacing:-.2px}
+.top .mon{margin:-2px 0 -4px}
+.ib{background:rgba(255,255,255,.14);border-radius:14px}
+.card,.stat,.box,.note{box-shadow:0 2px 10px rgba(50,70,110,.07);border:1px solid rgba(255,255,255,.9)}
+.card{border-radius:18px;padding:14px 15px}
+.card h3{font-weight:700;font-size:16px}
+.stat{border-radius:18px}
+.search input{background:#f5f7fb;border-color:#d6dde9;border-radius:15px}
+.search input:focus{background:#fff}
+.chip{background:#f7f9fc}
+.chip.on{background:var(--blue);color:#fff}
+.tg{background:#e1e8f3;color:#4a5f85;border:0;border-radius:9px;padding:1px 8px}
+button.tg{font-size:12.5px}
+.chip.tag{background:#e1e8f3;border-color:#e1e8f3;color:#4a5f85}
+.chip.tag.on{background:var(--blue);border-color:var(--blue);color:#fff}
+.fab{background:linear-gradient(180deg,#566d9d,#46598a);box-shadow:0 8px 18px rgba(58,77,119,.38)}
+.btn.pri{background:var(--blue)}
+#lock,#cover{background:linear-gradient(180deg,#eaeff9 0%,#cfd9ee 55%,#b7c5e2 100%)}
+#lock>.mon,#cover>.mon{height:min(150px,22vh);width:auto;margin-bottom:6px;filter:drop-shadow(0 6px 8px rgba(58,77,119,.18))}
+#lock h2{font-size:19px;font-weight:800;margin:10px 0 2px}
+.pad4{grid-template-columns:repeat(3,84px);gap:12px 14px}
+.pad4 button{height:60px;border-radius:50%/50%;font-size:23px;font-weight:600;box-shadow:0 2px 8px rgba(58,77,119,.13)}
+.dots i{border-color:#5a6f9c}
+.dots i.on{background:#5a6f9c}
+.empty .mon{height:120px;width:auto}
 </style>
 </head>
 <body>
@@ -143,19 +171,42 @@ const FMTS = ['BL', '웹툰', '게동', '영화', '기타'];
 
 /* ============ 캐릭터 (모니터머리) ============ */
 function mon(mood, size) {
+  const O = '#2c3b5e', B = '#b3c0d6', H = '#93a3bf', SC = '#3a4a6b', BK = '#31416f';
+  const limb = d => `<path d="${d}" fill="none" stroke="${O}" stroke-width="9" stroke-linecap="round"/><path d="${d}" fill="none" stroke="${B}" stroke-width="5" stroke-linecap="round"/>`;
+  const wave = mood === 'happy';
+  // 얼굴 (머리 상단 y 기준)
+  const cy = wave ? 41 : 45, mx = wave ? 49 : 55, ch = wave ? 50 : 57, lx = wave ? 32 : 33, rx = wave ? 88 : 87;
   const eyes = mood === 'happy'
-    ? '<path d="M40 47q6-8 12 0M68 47q6-8 12 0" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round"/>'
+    ? `<path d="M38 ${cy}q6-8 12 0M70 ${cy}q6-8 12 0" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round"/>`
     : mood === 'sleep'
-      ? '<path d="M40 45h12M68 45h12" stroke="#fff" stroke-width="3.4" stroke-linecap="round"/>'
-      : '<circle cx="46" cy="44" r="5.5" fill="#fff"/><circle cx="74" cy="44" r="5.5" fill="#fff"/>';
-  const mouth = mood === 'sleep' ? '<ellipse cx="60" cy="57" rx="3" ry="2.4" fill="#fff"/>' : mood === 'sad' ? '<path d="M54 59q6-5 12 0" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>' : '<path d="M54 55q6 6 12 0" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>';
-  return `<svg class="mon" width="${size}" height="${size}" viewBox="0 0 120 120" aria-hidden="true"><rect x="40" y="84" width="40" height="26" rx="10" fill="#c7d0de"/><rect x="54" y="74" width="12" height="14" fill="#9aa8bd"/><rect x="14" y="14" width="92" height="66" rx="14" fill="#eaeff6" stroke="#8c9bb2" stroke-width="3"/><rect x="21" y="21" width="78" height="50" rx="8" fill="#2f5fd0"/><path d="M27 27h26l-10 12H27z" fill="#fff" opacity=".18"/>${eyes}${mouth}<circle cx="37" cy="53" r="4" fill="#8fb4ff" opacity=".7"/><circle cx="83" cy="53" r="4" fill="#8fb4ff" opacity=".7"/><circle cx="31" cy="98" r="6" fill="#c7d0de"/><circle cx="89" cy="98" r="6" fill="#c7d0de"/></svg>`;
+      ? `<path d="M39 ${cy}q6 5 12 0M69 ${cy}q6 5 12 0" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round"/>`
+      : `<circle cx="45" cy="${cy}" r="5.6" fill="#fff"/><circle cx="75" cy="${cy}" r="5.6" fill="#fff"/><circle cx="45.4" cy="${cy + .4}" r="2.5" fill="${O}"/><circle cx="75.4" cy="${cy + .4}" r="2.5" fill="${O}"/>`;
+  const mouth = mood === 'sad' ? `<path d="M54 ${mx + 4}q6-5 12 0" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/>` : `<path d="M54 ${mx}q6 5 12 0" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/>`;
+  const face = `${eyes}${mouth}<circle cx="${lx}" cy="${ch}" r="4.6" fill="#e8574d"/><circle cx="${rx}" cy="${ch}" r="4.6" fill="#e8574d"/>`;
+  let g;
+  if (wave) {
+    g = `<ellipse cx="60" cy="116" rx="34" ry="3" fill="#7f8fae" opacity=".25"/>
+<path d="M60 14L63 6" stroke="${O}" stroke-width="2.6" stroke-linecap="round"/><circle cx="63.5" cy="5.5" r="4" fill="#9cabc4" stroke="${O}" stroke-width="2.4"/>
+${limb('M52 94L52 108')}${limb('M68 94L68 108')}<ellipse cx="50" cy="111" rx="7.5" ry="3.8" fill="${B}" stroke="${O}" stroke-width="2.4"/><ellipse cx="70" cy="111" rx="7.5" ry="3.8" fill="${B}" stroke="${O}" stroke-width="2.4"/>
+<rect x="44" y="66" width="32" height="32" rx="15" fill="${B}" stroke="${O}" stroke-width="2.6"/>
+${limb('M77 78Q87 85 84 95')}${limb('M43 78Q28 77 24 60')}
+<rect x="16" y="14" width="88" height="56" rx="16" fill="${H}" stroke="${O}" stroke-width="2.8"/><rect x="22" y="20" width="76" height="44" rx="10" fill="${SC}"/><path d="M28 27h14" stroke="#fff" stroke-width="2.6" stroke-linecap="round" opacity=".3"/>${face}<rect x="55" y="66" width="10" height="2.4" rx="1.2" fill="${O}" opacity=".5"/>`;
+  } else {
+    g = `<ellipse cx="60" cy="117" rx="40" ry="3" fill="#7f8fae" opacity=".25"/>
+<path d="M60 14L62 6" stroke="${O}" stroke-width="2.6" stroke-linecap="round"/><circle cx="62.5" cy="5.5" r="4" fill="#9cabc4" stroke="${O}" stroke-width="2.4"/>
+${limb('M47 104L42 112')}${limb('M73 104L78 112')}
+<rect x="38" y="74" width="44" height="34" rx="17" fill="${B}" stroke="${O}" stroke-width="2.6"/>
+<path d="M40 89L59 94L78 89L78 107L59 112L40 107Z" fill="${BK}" stroke="${O}" stroke-width="2.4" stroke-linejoin="round"/><path d="M44 92L59 96L74 92L74 105L59 109L44 105Z" fill="#eef2f9"/><path d="M59 96V109" stroke="${O}" stroke-width="1.6"/>
+${limb('M40 84Q32 100 46 100')}${limb('M80 84Q88 100 74 100')}
+<rect x="10" y="13" width="100" height="64" rx="17" fill="${H}" stroke="${O}" stroke-width="2.8"/><rect x="17" y="20" width="86" height="50" rx="11" fill="${SC}"/><path d="M24 27h16" stroke="#fff" stroke-width="2.6" stroke-linecap="round" opacity=".3"/>${face}`;
+  }
+  return `<svg class="mon" width="${size}" height="${size}" viewBox="0 0 120 120" aria-hidden="true">${g}</svg>`;
 }
 const STAR = 'M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3 6.1 20.6l1.3-6.6L2.5 9.4l6.6-.8z';
 function starSvg(fill, on, off) { // fill 0 / .5 / 1
-  const g = `<svg viewBox="0 0 24 24"><path d="${STAR}" fill="${off || '#d5dbe6'}"/>`;
+  const g = `<svg viewBox="0 0 24 24"><path d="${STAR}" fill="${off || '#d3dae6'}"/>`;
   if (fill <= 0) return g + '</svg>';
-  return g + `<path d="${STAR}" fill="${on || '#3d6fe0'}" ${fill < 1 ? 'style="clip-path:inset(0 50% 0 0)"' : ''}/></svg>`;
+  return g + `<path d="${STAR}" fill="${on || '#4c6290'}" ${fill < 1 ? 'style="clip-path:inset(0 50% 0 0)"' : ''}/></svg>`;
 }
 
 /* ============ 상태 ============ */
@@ -228,7 +279,7 @@ const avg = () => { const r = DB.entries.filter(e => e.rating); return r.length 
 function homeHTML() {
   const fm = FMTS.filter(f => DB.entries.some(e => (e.fmt || 'BL') === f));
   const drafts = Object.values(DR).sort((a, b) => b.ts - a.ts);
-  return `<div class="top">${mon('happy', 40)}<div class="grow"><h1>독후감 노트</h1><small>나만의 비밀 서재</small></div><button class="ib" id="gset" aria-label="설정">⚙️</button></div>
+  return `<div class="top">${mon('normal', 44)}<div class="grow"><h1>독후감 노트</h1><small>나만의 비밀 서재</small></div><button class="ib" id="gset" aria-label="설정">⚙️</button></div>
 <div class="pad">
  <div class="stat"><b>전체 독후감</b><span class="n" id="cnt">${DB.entries.length}</span><b>편</b><span class="s" id="avg">${avg() ? '평균 ★ ' + avg() : ''}</span></div>
  ${drafts.map(d => `<div class="draft"><span>✏️</span><span class="t">작성 중: ${esc(d.title || '(제목 없음)')} · ${fmtTime(d.ts)}</span><button class="btn sm pri" data-resume="${esc(d.key)}">이어쓰기</button><button class="btn sm" data-drop="${esc(d.key)}">버리기</button></div>`).join('')}
@@ -616,9 +667,9 @@ function showLock(mode, note) {
   LK = { mode, buf: '', first: '' }; $('#lock').classList.add('show'); $('#cover').classList.remove('show'); drawLock(note);
 }
 function drawLock(note) {
-  const t = LK_TXT[LK.mode], mood = LK.mode === 'unlock' ? 'sleep' : 'happy';
+  const t = LK_TXT[LK.mode], mood = LK.mode === 'unlock' ? 'normal' : 'happy';
   const wait = CFG.until && CFG.until > Date.now() ? Math.ceil((CFG.until - Date.now()) / 1000) : 0;
-  $('#lock').innerHTML = `${mon(wait ? 'sad' : mood, 104)}<h2>${t[0]}</h2><p class="s" id="lks">${esc(wait ? wait + '초 뒤에 다시 시도해 주세요' : (note || t[1]))}</p>
+  $('#lock').innerHTML = `${mon(wait ? 'sad' : mood, 150)}<h2>${t[0]}</h2><p class="s" id="lks">${esc(wait ? wait + '초 뒤에 다시 시도해 주세요' : (note || t[1]))}</p>
   <div class="dots" id="dts">${[0, 1, 2, 3].map(i => `<i class="${i < LK.buf.length ? 'on' : ''}"></i>`).join('')}</div>
   <div class="pad4">${[1, 2, 3, 4, 5, 6, 7, 8, 9].map(n => `<button data-n="${n}">${n}</button>`).join('')}<button class="e"></button><button data-n="0">0</button><button class="k" data-n="x" aria-label="지우기">⌫</button></div>
   ${LK.mode === 'unlock' ? '<button class="fg" id="fgt">비밀번호를 잊으셨나요?</button>' : (LK.mode.startsWith('verify') || LK.mode.startsWith('change')) ? '<button class="fg" id="lcx">취소</button>' : ''}`;
@@ -665,7 +716,7 @@ async function forgotPin() {
 let lockedAt = 0;
 document.addEventListener('visibilitychange', () => {
   if (!CFG.pin) return;
-  if (document.hidden) { lockedAt = Date.now(); if (S.s === 'write') flushDraft(); if (!lockOpen()) $('#cover').innerHTML = mon('sleep', 96), $('#cover').classList.add('show'); }
+  if (document.hidden) { lockedAt = Date.now(); if (S.s === 'write') flushDraft(); if (!lockOpen()) $('#cover').innerHTML = mon('sleep', 130), $('#cover').classList.add('show'); }
   else { if (lockedAt && Date.now() - lockedAt > 20000) showLock('unlock'); else $('#cover').classList.remove('show'); }
 });
 
