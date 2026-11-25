@@ -2,6 +2,7 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
+<meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>독후감 노트</title>
 <link rel="manifest" href="manifest.webmanifest">
@@ -306,7 +307,7 @@ function listHTML() {
   if (!DB.entries.length) return `<div class="empty">${mon('sleep', 96)}<p>아직 독후감이 없어요.<br>첫 독후감을 남겨 볼까요?</p><button class="btn pri" id="imp1">기존 독후감 가져오기(JSON)</button></div>`;
   if (!l.length) return `<div class="empty">${mon('sad', 84)}<p>「${esc(HOME.q)}」에 맞는 독후감이 없어요.</p></div>`;
   const show = l.slice(0, HOME.max);
-  return (HOME.q || HOME.fmt || HOME.kws.length ? `<div class="msg" style="margin:0 2px 8px">검색 결과 ${l.length}편</div>` : '') + show.map(e => `<button class="card" data-id="${e.id}">
+  return (HOME.q || HOME.fmt || HOME.kws.length ? `<div class="msg" style="margin:0 2px 8px">검색 결과 ${l.length}편</div>` : '') + show.map(e => `<button class="card" data-id="${esc(e.id)}">
    <div class="ct"><h3>${esc(e.title)}</h3><span class="rt ${e.rating ? '' : 'none'}">${e.rating ? '★ ' + e.rating.toFixed(1) : '별점 없음'}</span></div>
    <div class="meta">${e.author ? '<span>' + esc(e.author) + '</span>' : ''}${(e.fmt && e.fmt !== 'BL') ? '<span>' + esc(e.fmt) + '</span>' : ''}${e.group ? '<span class="chip grp">' + esc(e.group) + '</span>' : ''}${e.imp ? '' : '<span>' + fmtDate(e.created) + '</span>'}</div>
    ${(e.tags || []).length ? '<div class="tags">' + e.tags.slice(0, 5).map(t => '<span class="tg">#' + esc(t) + '</span>').join('') + (e.tags.length > 5 ? '<span class="tg">+' + (e.tags.length - 5) + '</span>' : '') + '</div>' : ''}
@@ -364,7 +365,7 @@ function viewHTML(e) {
 <div class="pad det">
  <h2>${esc(e.title)}</h2>
  <div class="meta">${e.author ? '<span>' + esc(e.author) + '</span>' : ''}<span>${esc(e.fmt || 'BL')}</span>${e.group ? '<span class="chip grp">' + esc(e.group) + '</span>' : ''}${e.imp ? '' : '<span>' + fmtDate(e.created) + '</span>'}</div>
- <div class="ro">${[1, 2, 3, 4, 5].map(i => starSvg(r >= i ? 1 : r >= i - .5 ? .5 : 0)).join('')}<span class="rv">${e.rating ? e.rating.toFixed(1) : '별점 없음'}</span>${e.ratingRaw ? `<span class="msg" style="margin:0">(원래 ${e.ratingRaw})</span>` : ''}</div>
+ <div class="ro">${[1, 2, 3, 4, 5].map(i => starSvg(r >= i ? 1 : r >= i - .5 ? .5 : 0)).join('')}<span class="rv">${e.rating ? e.rating.toFixed(1) : '별점 없음'}</span>${e.ratingRaw ? `<span class="msg" style="margin:0">(원래 ${esc(e.ratingRaw)})</span>` : ''}</div>
  ${(e.tags || []).length ? '<div class="tags">' + e.tags.map(t => '<button class="tg" data-tj="' + esc(t) + '">#' + esc(t) + '</button>').join('') + '</div>' : ''}
  <div class="note">${esc(e.note) || '<span style="color:var(--gray)">감상노트가 비어 있어요</span>'}</div>
  <div class="links"><span class="msg" style="margin:4px 4px 0 0">작품 찾기</span>
@@ -567,13 +568,12 @@ function pickImport() {
     try {
       const j = JSON.parse(await f.text()); if (!Array.isArray(j.entries)) throw 0;
       let n = 0, u = 0;
-      j.entries.forEach(x => {
-        if (!x || !x.id || !x.title) return;
+      cleanList(j.entries).forEach(x => {
         const c = byId(x.id);
-        if (!c) { DB.entries.push(Object.assign({ tags: [], fmt: 'BL', note: '' }, x)); n++; }
+        if (!c) { DB.entries.push(x); n++; }
         else if ((x.updated || 0) > (c.updated || 0)) { Object.assign(c, x); u++; }
       });
-      if (j.kw) ['gen', 'gong', 'su'].forEach(k => (j.kw[k] || []).forEach(t => { if (!(DB.kw[k] || []).includes(t)) (DB.kw[k] = DB.kw[k] || []).push(t); }));
+      const jk = cleanKw(j.kw); ['gen', 'gong', 'su'].forEach(k => (jk[k] || []).forEach(t => { if (!(DB.kw[k] || []).includes(t)) (DB.kw[k] = DB.kw[k] || []).push(t); }));
       saveDB(); render(); toast(n + '편을 가져왔어요' + (u ? ' (' + u + '편 갱신)' : ''));
     } catch (e) { toast('가져올 수 없는 파일이에요'); }
   };
@@ -616,7 +616,19 @@ async function gapi(url, opt = {}) {
   }
   return r;
 }
+function clean(x) {
+  if (!x || typeof x !== 'object' || typeof x.id !== 'string' || !x.id || typeof x.title !== 'string') return null;
+  const n = v => (typeof v === 'number' && isFinite(v)) ? v : null, str = v => typeof v === 'string' ? v : '';
+  const r = n(x.rating);
+  return { id: x.id.slice(0, 80), title: x.title.slice(0, 300), alias: str(x.alias).slice(0, 300), author: str(x.author).slice(0, 200), fmt: FMTS.includes(x.fmt) ? x.fmt : 'BL',
+    tags: Array.isArray(x.tags) ? x.tags.filter(t => typeof t === 'string' && t).map(t => t.slice(0, 40)).slice(0, 60) : [],
+    rating: r && r >= .5 && r <= 5 ? Math.round(r * 2) / 2 : null, ratingRaw: n(x.ratingRaw), note: str(x.note), group: str(x.group).slice(0, 100),
+    created: n(x.created) || Date.now(), updated: n(x.updated) || 0, imp: !!x.imp };
+}
+const cleanList = a => (Array.isArray(a) ? a : []).map(clean).filter(Boolean);
+const cleanKw = k => { const o = {}; ['gen', 'gong', 'su'].forEach(c => o[c] = (k && Array.isArray(k[c]) ? k[c] : []).filter(t => typeof t === 'string' && t).map(t => t.slice(0, 40))); return o; };
 function mergeData(L, R) {
+  R = { entries: cleanList(R.entries), deleted: (R.deleted && typeof R.deleted === 'object') ? R.deleted : {}, kw: cleanKw(R.kw) };
   const del = Object.assign({}, R.deleted || {}); Object.entries(L.deleted || {}).forEach(([k, v]) => del[k] = Math.max(del[k] || 0, v));
   const map = {};
   [...(R.entries || []), ...(L.entries || [])].forEach(p => { if (!map[p.id] || (p.updated || 0) > (map[p.id].updated || 0)) map[p.id] = p; });
